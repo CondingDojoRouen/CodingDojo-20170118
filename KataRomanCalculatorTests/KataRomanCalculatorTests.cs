@@ -27,5 +27,17 @@ namespace CodingDojo
             //Assert
             Assert.AreEqual("I", result);
         }
+
+        [TestMethod]
+        public void AddingIAndIIIReturnsIV()
+        {
+            //Arrange
+            string n1 = "I";
+            string n2 = "III";
+            //Act
+            string result = KataRomanCalculator.Add(n1, n2);
+            //Assert
+            Assert.AreEqual("IV", result);
+        }
     }
 }
