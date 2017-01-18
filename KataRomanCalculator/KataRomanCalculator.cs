@@ -4,8 +4,12 @@
     {
         public static string Add(string n1, string n2)
         {
-            string result = string.Empty;
+            string result = n1+n2;
+            
             return result;
+
         }
+
+
     }
 }

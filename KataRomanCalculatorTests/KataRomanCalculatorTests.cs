@@ -15,5 +15,17 @@ namespace CodingDojo
             //Assert
             Assert.AreEqual(String.Empty, result);
         }
+
+        [TestMethod]
+        public void AddingEmptyStringAndOneReturnsOne()
+        {
+            //Arrange
+            string n1 = string.Empty;
+            string n2 = "I";
+            //Act
+            string result = KataRomanCalculator.Add(n1, n2);
+            //Assert
+            Assert.AreEqual("I", result);
+        }
     }
 }
