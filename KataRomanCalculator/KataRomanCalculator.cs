@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CodingDojo
 {
@@ -8,17 +9,30 @@ namespace CodingDojo
         {
             if (string.IsNullOrWhiteSpace(n1))
                 return n2;
-            
-            Enum.TryParse<RomanFormat>(n1, out var numeric1);
-            Enum.TryParse<RomanFormat>(n2, out var numeric2);
 
-            int numericResult = (int)numeric1 + (int)numeric2;
+            int numericResult = Compute(n1) + Compute(n2);
 
             string result = Enum.GetName(typeof(RomanFormat), numericResult);
 
             return result;
         }
+        public static int Compute(string roman)
+        {
+            int result;
+
+            result = roman.Reverse().Select(c => {
+                Enum.TryParse<RomanFormat>(c.ToString(), out var numeric);
+                return (int)numeric;
+            }).Aggregate(0, (acc, currentInt) =>
+            {
+                return currentInt < acc ? acc - currentInt : acc + currentInt;
+            });
+
+            return result;
+        }
     }
+
+    
 
     public enum RomanFormat
     {
@@ -26,7 +40,10 @@ namespace CodingDojo
         II = 2,
         III = 3,
         IV = 4,
+        V = 5,
         VII = 7,
         IX = 9,
+        X = 10,
+        L = 50
     }
 }
