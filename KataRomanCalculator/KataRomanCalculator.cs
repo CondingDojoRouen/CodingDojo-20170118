@@ -23,10 +23,10 @@ namespace CodingDojo
             result = roman.Reverse().Select(c => {
                 Enum.TryParse<RomanFormat>(c.ToString(), out var numeric);
                 return (int)numeric;
-            }).Aggregate(0, (acc, currentInt) =>
-            {
-                return currentInt < acc ? acc - currentInt : acc + currentInt;
-            });
+            }).Aggregate(new Tuple<int, int>(0, 0),
+                        (acc, currentInt) => currentInt < acc.Item2 ? new Tuple<int, int>(acc.Item1 - currentInt, currentInt)
+                                                                    : new Tuple<int, int>(acc.Item1 + currentInt, currentInt),
+                        t => t.Item1);
 
             return result;
         }
